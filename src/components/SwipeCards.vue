@@ -15,13 +15,6 @@
         />
       </div>
     </div>
-
-    <!-- Progress Indicator -->
-    <div class="absolute bottom-4 left-0 right-0 px-4">
-      <div class="bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-center text-sm font-medium text-gray-700">
-        {{ currentIndex + 1 }} / {{ totalCats }}
-      </div>
-    </div>
   </div>
 </template>
 
@@ -29,7 +22,7 @@
 import { ref, computed, onMounted } from 'vue'
 import CatCard from './CatCard.vue'
 
-const emit = defineEmits(['finished'])
+const emit = defineEmits(['finished', 'progress'])
 
 const totalCats = 15
 const cats = ref([])
@@ -39,7 +32,7 @@ const dislikes = ref(0)
 
 // Show up to 3 cards in the stack
 const visibleCats = computed(() => {
-  return cats.value.slice(currentIndex.value, currentIndex.value + 3)
+  return cats.value.slice(currentIndex.value, currentIndex.value + 10)
 })
 
 const getCardStyle = (index) => {
@@ -65,15 +58,19 @@ const handleSwipe = (direction) => {
     setTimeout(() => {
       emit('finished', { likes: likes.value, dislikes: dislikes.value })
     }, 300)
+  } else {
+    emit('progress', { currentIndex: currentIndex.value, totalCats: totalCats })
   }
 }
 
 onMounted(() => {
-  // Generate cat data with Cataas API URLs
+  // Generate cat data with Cataas API URLs with unique timestamp to get new images
+  const timestamp = Date.now()
   cats.value = Array.from({ length: totalCats }, (_, i) => ({
     id: i,
-    imageUrl: `https://cataas.com/cat?${i}`,
-    timestamp: Date.now() + i
+    imageUrl: `https://cataas.com/cat?t=${timestamp}&i=${i}`,
+    timestamp: timestamp + i
   }))
+  emit('progress', { currentIndex: currentIndex.value, totalCats: totalCats })
 })
 </script>

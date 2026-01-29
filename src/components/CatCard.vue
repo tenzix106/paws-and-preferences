@@ -156,11 +156,10 @@ const animateSwipeOut = (direction) => {
   
   const moveX = direction === 'right' ? 1000 : -1000
   card.style.transform = `translateX(${moveX}px) rotate(${moveX * 0.1}deg)`
-  card.style.transition = 'transform 0.3s ease-out'
+  card.style.transition = 'transform 0.3s ease-out, opacity 0.3s ease-out'
+  card.style.opacity = '0'
   
-  setTimeout(() => {
-    emit('swipe', direction)
-  }, 300)
+  emit('swipe', direction)
 }
 
 const resetCard = () => {
