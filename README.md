@@ -6,7 +6,6 @@ A fun, Tinder-style web app for discovering your favorite cats! Swipe right to l
 
 - Swipe gestures (touch and mouse support)
 - Mobile-friendly responsive design
-- Cute pastel color scheme
 - Real cat images from Cataas API
 - Results summary with personalized messages
 - Smooth animations and transitions
