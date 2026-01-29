@@ -3,7 +3,7 @@
     <div class="container mx-auto px-4 py-8 max-w-md">
       <header class="text-center mb-8">
         <h1 class="text-4xl font-bold text-gray-800 mb-2">
-          🐾 Paws & Preferences
+          Paws & Preferences
         </h1>
         <p class="text-gray-600 text-sm">Find your favorite kitty!</p>
       </header>
